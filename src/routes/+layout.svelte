@@ -1,53 +1,43 @@
-<script>
-	import Header from './Header.svelte';
-	import './styles.css';
+<script lang="ts">
+	import '../app.css';
+	import QuestionMarkCircle from '$lib/icons/QuestionMarkCircle.svelte';
+	import Modal from '$lib/components/Modal.svelte';
+	// Prevent double tapping from zooming in on mobile - thanks copilot!
+	var lastTouchEnd = 0;
+
+	function handleTouchEnd(event: any) {
+		var now = new Date().getTime();
+		if (now - lastTouchEnd <= 300) {
+			event.preventDefault();
+		}
+		lastTouchEnd = now;
+	}
+	let openModal = false;
 </script>
 
-<div class="app">
-	<Header />
-
-	<main>
-		<slot />
-	</main>
-
-	<footer>
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
-	</footer>
+<svelte:window on:touchend={handleTouchEnd} />
+<div class="p-4">
+	<slot />
 </div>
 
-<style>
-	.app {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
-	}
-
-	main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		padding: 1rem;
-		width: 100%;
-		max-width: 64rem;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
-
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 12px;
-	}
-
-	footer a {
-		font-weight: bold;
-	}
-
-	@media (min-width: 480px) {
-		footer {
-			padding: 12px 0;
-		}
-	}
-</style>
+<button
+	class="btn btn-circle btn-primary absolute left-4 bottom-4"
+	on:click={() => {
+		console.log('clicking open', openModal);
+		openModal = !openModal;
+	}}
+>
+	<QuestionMarkCircle />
+</button>
+<Modal
+	title="It's just Simple Timers"
+	open={openModal}
+	closeAction={() => {
+		openModal = false;
+	}}
+>
+	I hope you find them helpful! If you do have any questions, check out the issues page on GitHub <a
+		href=""
+		target="_blank">here</a
+	>.
+</Modal>

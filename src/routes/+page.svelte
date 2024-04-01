@@ -1,59 +1,32 @@
-<script>
-	import Counter from './Counter.svelte';
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcome_fallback from '$lib/images/svelte-welcome.png';
+<script lang="ts">
+	import Timer from '$lib/components/Timer.svelte';
+
+	let timers = {};
+	let intervalTime = 60; // 1 minute - the time to add or subtract from the timer
+
+	function generateUniqueId() {
+		return Math.random().toString(36).slice(2, 9);
+	}
+
+	function createTimer() {
+		const uniqueId = generateUniqueId();
+		const numberOfTimers = Object.keys(timers).length;
+		const order = numberOfTimers + 1;
+		timers = {
+			...timers,
+			[order]: {
+				timerLengthInSeconds: 0,
+				timerName: '',
+				timerId: uniqueId,
+				order: numberOfTimers + 1
+			}
+		};
+	}
 </script>
 
-<svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
-</svelte:head>
+<h1 class="text-2xl text-center">Simple Timer</h1>
 
-<section>
-	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcome_fallback} alt="Welcome" />
-			</picture>
-		</span>
+<Timer {intervalTime} />
 
-		to your new<br />SvelteKit app
-	</h1>
-
-	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
-	</h2>
-
-	<Counter />
-</section>
-
-<style>
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 0.6;
-	}
-
-	h1 {
-		width: 100%;
-	}
-
-	.welcome {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
-
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
-	}
-</style>
+<div class="divider" />
+<button class="btn btn-primary btn-sm w-full mt-4" on:click={createTimer}>Add Timer</button>
