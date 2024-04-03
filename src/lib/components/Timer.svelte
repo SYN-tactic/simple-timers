@@ -35,7 +35,7 @@
 	}
 	$: timerHasStarted = false;
 	$: timerPaused = false;
-	$: timerHasEnded = timeLeft === 0;
+	$: timerHasEnded = timeLeft === 0 && timerHasStarted;
 	let intervalId: ReturnType<typeof setTimeout>;
 	$: {
 		if (timerHasEnded) {
