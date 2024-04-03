@@ -6,6 +6,7 @@
 	import Github from '$lib/icons/Github.svelte';
 	import LinkedIn from '$lib/icons/LinkedIn.svelte';
 	import MeCon from '$lib/icons/MeCon.svelte';
+	import screenshot from '$lib/images/simpletimerspic01.png';
 
 	let openModal = false;
 </script>
@@ -16,6 +17,13 @@
 		name="description"
 		content="Simple timers that you can stack - by default they will trigger each other. All your times are saved in local storage so you can come back to them later."
 	/>
+	<meta property="og:title" content="Simple Timers" />
+	<meta
+		property="og:description"
+		content="Simple timers that you can stack - by default they will trigger each other. All your times are saved in local storage so you can come back to them later."
+	/>
+	<meta property="og:url" content="https://simpletimers.app" />
+	<meta property="og:image" content={screenshot} />
 </svelte:head>
 
 <svelte:window />
