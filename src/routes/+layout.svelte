@@ -6,11 +6,17 @@
 	import Github from '$lib/icons/Github.svelte';
 	import LinkedIn from '$lib/icons/LinkedIn.svelte';
 	import MeCon from '$lib/icons/MeCon.svelte';
-	// Prevent double tapping from zooming in on mobile - thanks copilot!
-	var lastTouchEnd = 0;
 
 	let openModal = false;
 </script>
+
+<svelte:head>
+	<title>Simple Timers</title>
+	<meta
+		name="description"
+		content="Simple timers that you can stack - by default they will trigger each other. All your times are saved in local storage so you can come back to them later."
+	/>
+</svelte:head>
 
 <svelte:window />
 <div class="p-4 touch-manipulation">
