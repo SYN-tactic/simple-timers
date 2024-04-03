@@ -2,6 +2,6 @@
 	// An Icon wrapper in case it's needed
 </script>
 
-<div>
+<div class="flex">
 	<slot />
 </div>

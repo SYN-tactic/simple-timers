@@ -1,3 +1,35 @@
-// since there's no dynamic data here, we can prerender
-// it so that it gets served as a static asset in production
-export const prerender = true;
+import type { TimerType } from "$lib/types";
+import { browser } from '$app/environment';
+
+function generateUniqueId() {
+    return Math.random().toString(36).slice(2, 9);
+}
+
+export async function load() {
+    let timers: TimerType[] = [];
+
+    // Make sure we're in the browser
+    if (browser) {
+        // If we are, load the timers from local storage - if they exist.
+        const storedTimers = localStorage.getItem('timers');
+        timers = storedTimers ? JSON.parse(storedTimers) : [];
+        console.log('any stored timers', timers)
+    }
+    if (timers.length === 0) {
+        // Initialize the timers with the default timer
+        timers = [
+            {
+                timerLengthInSeconds: 60,
+                timerName: 'Default',
+                timerId: generateUniqueId(),
+            }
+        ]
+    }
+
+    console.log('returning from page.ts load function with timers: ', timers)
+
+    return {
+        timers: timers || []
+
+    };
+}
