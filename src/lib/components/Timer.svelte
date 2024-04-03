@@ -1,3 +1,5 @@
+<svelte:options accessors={true} />
+
 <script lang="ts">
 	import Plus from '$lib/icons/Plus.svelte';
 	import Minus from '$lib/icons/Minus.svelte';

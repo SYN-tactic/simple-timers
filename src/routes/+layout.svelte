@@ -20,7 +20,6 @@
 <button
 	class="btn btn-circle btn-primary absolute left-4 bottom-4"
 	on:click={() => {
-		console.log('clicking open', openModal);
 		openModal = !openModal;
 	}}
 >
