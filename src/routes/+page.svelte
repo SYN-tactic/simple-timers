@@ -61,7 +61,8 @@
 	}
 
 	function deleteTimer(timerId: string) {
-		localTimers = localTimers.filter((timer) => timer.timerId !== timerId);
+		let filteredTimers = localTimers.filter((timer) => timer.timerId !== timerId);
+		localTimers = filteredTimers;
 		// Save localTimers to local storage
 		saveToLocalStorage();
 	}
@@ -89,7 +90,7 @@
 
 <h1 class="text-2xl text-center">Simple Timer(s)</h1>
 
-{#each localTimers as timer, i}
+{#each localTimers as timer, i (timer.timerId)}
 	{#if i > 0}
 		<div class="w-full relative">
 			<div class="absolute flex flex-row w-full items-center justify-center">
