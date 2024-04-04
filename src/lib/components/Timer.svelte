@@ -111,8 +111,30 @@
 		<button on:click={() => deleteTimer(timerId)}><Trash /></button>
 	{/if}
 	<div class="flex flex-col justify-center items-center grow">
-		<div class={`text-7xl ${activeAlertText ? 'text-accent' : ''}`}>
+		<div
+			class={`mt-[24px] flex flex-row text-7xl items-center ${activeAlertText ? 'text-accent' : ''}`}
+		>
+			<button
+				class="btn btn-sm btn-circle btn-neutral mr-2"
+				on:click={() => {
+					if (timerHasStarted) {
+						timeLeft -= intervalTime;
+					} else {
+						timeInSeconds -= intervalTime;
+					}
+				}}><Minus /></button
+			>
 			{convertTimeToString(timeLeft)}
+			<button
+				class="btn btn-circle btn-sm btn-neutral ml-2"
+				on:click={() => {
+					if (timerHasStarted) {
+						timeLeft += intervalTime;
+					} else {
+						timeInSeconds += intervalTime;
+					}
+				}}><Plus /></button
+			>
 		</div>
 		<div class="flex flex-row items-center">
 			<div class="badge badge-outline mr-1">{convertTimeToString(timeInSeconds)}</div>
@@ -120,16 +142,6 @@
 		</div>
 	</div>
 	<div class="flex flex-col w-24">
-		<button
-			class="btn btn-success btn-md"
-			on:click={() => {
-				if (timerHasStarted) {
-					timeLeft += intervalTime;
-				} else {
-					timeInSeconds += intervalTime;
-				}
-			}}><Plus /></button
-		>
 		{#if timerPaused || !timerHasStarted || timerHasEnded}
 			<button class="btn btn-primary btn-md mt-1" on:click={startCountdown}>
 				<Play />
@@ -139,15 +151,5 @@
 				<Pause />
 			</button>
 		{/if}
-		<button
-			class="btn btn-error btn-md mt-1"
-			on:click={() => {
-				if (timerHasStarted) {
-					timeLeft -= intervalTime;
-				} else {
-					timeInSeconds -= intervalTime;
-				}
-			}}><Minus /></button
-		>
 	</div>
 </div>
