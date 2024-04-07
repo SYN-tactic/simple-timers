@@ -3,6 +3,8 @@
 	import { browser } from '$app/environment';
 	import type { CreateTimerType } from '$lib/types';
 	import Link from '$lib/icons/Link.svelte';
+	import ChevronDoubleDown from '$lib/icons/ChevronDoubleDown.svelte';
+	import ChevronToggle from '$lib/icons/ChevronToggle.svelte';
 
 	export let data;
 	let intervalTime = 30; // 1 minute - the time to add or subtract from the timer
@@ -88,14 +90,14 @@
 	}
 </script>
 
-<h1 class="text-2xl text-center">Simple Timer(s)</h1>
+<h1 class="text-2xl text-center">Simple Timers</h1>
 
 {#each localTimers as timer, i (timer.timerId)}
 	{#if i > 0}
 		<div class="w-full relative">
-			<div class="absolute flex flex-row w-full items-center justify-center">
+			<div class="absolute flex flex-row w-full items-center justify-center -top-[4px]">
 				<button on:click={() => saveTimerLinkStatus(i - 1, !localTimers[i - 1].linked)}
-					><Link active={localTimers[i - 1].linked} /></button
+					><ChevronToggle active={localTimers[i - 1].linked} /></button
 				>
 			</div>
 			<div class="divider" />
