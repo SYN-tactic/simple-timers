@@ -90,7 +90,7 @@
 	}
 </script>
 
-<h1 class="text-2xl text-center">Simple Timer(s)</h1>
+<h1 class="text-2xl text-center">Simple Timers</h1>
 
 {#each localTimers as timer, i (timer.timerId)}
 	{#if i > 0}
